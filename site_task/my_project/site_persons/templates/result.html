@@ -1,0 +1,33 @@
+{% extends 'info_persons.html' %}
+{% block content %}
+<form action="" method = 'post'>
+    {% csrf_token %}
+    <label for="">Кого искать</label>
+    <input  name = 'search' type="text">
+    <button>Найти</button>
+</form>
+<h2>Результаты поиска по "{{query}}"</h2>
+
+{% if empty %}
+<p style = ' font-size: 32px;color: red;'>{{empty}}</p>
+{% endif %}
+<table border = '1'>
+        <tr style="background : green; color = yellow;">
+        <td><a href="/info_persons/full_name"> ФИО</a></td>
+        <td><a href="/info_persons/position"> Должность</a></td>
+        <td><a href="/info_persons/employment_date"> Дата прийома на работу</a></td>
+        <td><a href="/info_persons/salary"> Зарплата</a></td>
+        <td><a href="/info_persons/parent"> Начальник</a></td>
+        </tr>
+    {% for human in result_list %}
+    <tr>
+        <td>{{ human.full_name }}</td>
+        <td>{{ human.position }}</td>
+        <td>{{ human.employment_date }}</td>
+        <td>{{ human.salary }}</td>
+        <td>{{ human.parent }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

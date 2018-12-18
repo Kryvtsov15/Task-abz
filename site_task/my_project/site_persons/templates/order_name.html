@@ -1,0 +1,10 @@
+{% block order %}
+{% for human in name %}
+    <tr>
+        <td>{{ human.full_name }}</td>
+        <td>{{ human.position }}</td>
+        <td>{{ human.employment_date }}</td>
+        <td>{{ human.salary }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

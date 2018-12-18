@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Домашняя страница{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'styles/style.css'%}">
+
+</head>
+<body>
+
+
+<header>
+    <img  height="200" src="http://rtfm.co.ua/wp-content/uploads/2014/11/django_logo_1.png" alt="">
+    <nav>
+        <a href="/">Домашняя страница</a>
+        <a href="/list_of_persons">Список сотрудников</a>
+        <a href="/info_persons">Информация о сотрудниках</a>
+         {% if user.is_authenticated %}
+            <a href="/logout">Выйти({{user.username}})</a>
+            {% else %}
+            <a href="/register">Регистрация</a>
+            <a href="/login">Авторизация</a>
+            {% endif %}
+        </header>
+    </nav>
+
+{% block content %}
+<h1>Домашняя страница! </h1>
+<div>
+    Тут будет находиться информация о компании.
+</div>
+{% endblock %}
+
+</body>
+</html>

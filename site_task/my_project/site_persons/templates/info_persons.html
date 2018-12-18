@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+ {% block title %} Сотрудники {% endblock%}
+
+{%block content%}
+    <h1>Информация о сотрудниках</h1>
+    {% if user.is_authenticated %}
+    <form action="/info_persons/" method = 'post'>
+    {% csrf_token %}
+    <label for="">Кого искать</label>
+    <input  name = 'search' type="text">
+    <button>Найти</button>
+    </form>
+<table border="1" cellpadding="5px">
+    <tr style="background : green; color = yellow;">
+        <td><a href="/info_persons/full_name"> ФИО</a></td>
+        <td><a href="/info_persons/position"> Должность</a></td>
+        <td><a href="/info_persons/employment_date"> Дата прийома на работу</a></td>
+        <td><a href="/info_persons/salary"> Зарплата</a></td>
+        <td><a href="/info_persons/parent"> Начальник</a></td>
+
+    </tr>
+    {% for human in all_humans %}
+    <tr>
+        <td>{{ human.full_name }}</td>
+        <td>{{ human.position }}</td>
+        <td>{{ human.employment_date }}</td>
+        <td>{{ human.salary }}</td>
+        <td>{{ human.parent }}</td>
+    </tr>
+        {% endfor %}
+
+</table>
+    {% else %}
+     <h1>ВЫ НЕ АВТОРИЗИРОВАНЫ</h1>
+    {% endif %}
+{% endblock %}
+
+)
